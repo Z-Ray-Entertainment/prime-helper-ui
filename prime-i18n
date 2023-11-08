@@ -21,10 +21,16 @@ language_default["BootDriverChanged"]="Driver changed successfully to:"
 language_de["BootDriverChanged"]="Treiber erfolgreich geändert zu:"
 
 language_default["PrimeRunNotNvidia"]="Your system is running in exclusive intel mode. Can not run appliction on nVidia GPU"
-language_de["PrimeRunNotNvidia"]="Ihr system läuft im exlusiven Intelmodus. Anwendungen können nicht auf der nVidia Grafikkarte ausgeführt werden."
+language_de["PrimeRunNotNvidia"]="Ihr system läuft im exklusiven Intelmodus. Anwendungen können nicht auf der nVidia Grafikkarte ausgeführt werden."
 
 language_default["PrimeRunNoExec"]="No appication was specified to be run on your nVidia GPU."
 language_de["PrimeRunNoExec"]="Es wurde keine Anwendung spezifiziert, die auf Ihrer nVidia Grafikkarte ausgeführt werden soll."
+
+language_default["ZinkRunNoExec"]="No appication was specified to be run using Zink (OpenGL over Vulkan)."
+language_de["ZinkRunNoExec"]="Es wurde keine Anwendung spezifiziert, die via Zink (OpenGL via Vulkan) ausgeführt werden soll."
+
+language_default["ZinkRunOffload"]="Your system runs in offload mode. It might be that Zink does run on your integrated GPU instead of your dedicated. If this is the case consider switching to nvidia exclusively"
+language_de["ZinkRunOffload"]="Ihr System läuft im offload modus. Es kann sein, dass Zink auf Ihrer integrierten Grafikkarte statt auf ihrer dedizierten ausgeführt wird. Sollte dies der Fall sein, ziehen Sie in betracht auf den exklusiven nViai Modus zu wechseln"
 
 IFS='.' read -ra lang <<< "$LANG"
 

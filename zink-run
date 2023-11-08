@@ -1,0 +1,24 @@
+#!/usr/bin/bash
+if [ -z ${@+x} ]; then
+    zenity --info --text="$(exec prime-i18n ZinkRunNoExec)" --title="ZinkRun"
+else
+    has_prime_select=false
+
+    ($(exec prime-test silent))
+    case $? in
+        0)
+        has_prime_select=true
+        ;;
+    esac
+
+    if $has_prime_select; then
+        current=($(exec /usr/sbin/prime-select get-current))
+        driver=${current[2]}
+        case $driver in
+            offload)
+                zenity --info --text="$(exec prime-i18n ZinkRunOffload)" --title="ZinkRun"
+            ;;
+        esac
+    fi
+    __GLX_VENDOR_LIBRARY_NAME=mesa MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink "$@"
+fi
