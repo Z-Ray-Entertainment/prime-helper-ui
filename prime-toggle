@@ -74,9 +74,9 @@ if $has_prime_select; then
 					esac
 					;;
 				esac
+				gnome-session-quit --logout
 				;;
 			esac
 		;;
 	esac
-	gnome-session-quit --logout
 fi
