@@ -3,27 +3,38 @@ intel_boot=FALSE
 offload_boot=FALSE
 nvidia_boot=FALSE
 
-current_boot=($(exec /usr/sbin/prime-select get-boot))
-case ${current_boot[4]} in
-	"intel")
-	intel_boot=TRUE
-	;;
-	"offload")
-	offload_boot=TRUE
-	;;
-	"nvidia")
-	nvidia_boot=TRUE
+has_prime_select=false
+
+($(exec prime-test))
+case $? in
+	0)
+	has_prime_select=true
 	;;
 esac
 
-selected=$(zenity --list --radiolist --column="" --column="Title" --hide-header $offload_boot "offload" $nvidia_boot "nvidia" $intel_boot "intel" --hide-header --text="$(exec prime-i18n BootDriver)" --title="$(exec prime-i18n TitleSelect)")
-case $? in
-	0)
-	pkexec /usr/sbin/prime-select boot $selected
-	case $? in
-		0)
-		zenity --info --title="$(exec prime-i18n TitleSuccess)" --text="$(prime-i18n BootDriverChanged) $selected."
+if $has_prime_select; then
+	current_boot=($(exec /usr/sbin/prime-select get-boot))
+	case ${current_boot[4]} in
+		"intel")
+		intel_boot=TRUE
+		;;
+		"offload")
+		offload_boot=TRUE
+		;;
+		"nvidia")
+		nvidia_boot=TRUE
 		;;
 	esac
-	;;
-esac
+
+	selected=$(zenity --list --radiolist --column="" --column="Title" --hide-header $offload_boot "offload" $nvidia_boot "nvidia" $intel_boot "intel" --hide-header --text="$(exec prime-i18n BootDriver)" --title="$(exec prime-i18n TitleSelect)")
+	case $? in
+		0)
+		pkexec /usr/sbin/prime-select boot $selected
+		case $? in
+			0)
+			zenity --info --title="$(exec prime-i18n TitleSuccess)" --text="$(prime-i18n BootDriverChanged) $selected."
+			;;
+		esac
+		;;
+	esac
+fi
