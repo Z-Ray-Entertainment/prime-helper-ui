@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec = prime-toggle
+Icon = de.zray.prime-toggle
+Type = Application
+Terminal = false
+Name = Prime Toggle
+

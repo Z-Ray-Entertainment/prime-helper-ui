@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec = prime-boot
+Icon = de.zray.prime-boot
+Type = Application
+Terminal = false
+Name = Prime Boot
