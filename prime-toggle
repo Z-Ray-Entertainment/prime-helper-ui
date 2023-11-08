@@ -74,7 +74,14 @@ if $has_prime_select; then
 					esac
 					;;
 				esac
-				gnome-session-quit --logout
+				case $dialog_helper in
+					zenity)
+						gnome-session-quit --logout
+					;;
+					kdialog)
+						qdbus org.kde.ksmserver /KSMServer logout 1 0 3
+					;;
+				esac
 				;;
 			esac
 		;;
