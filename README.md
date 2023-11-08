@@ -5,6 +5,8 @@ To help users with older nVidia Optimus Laptops to easily switch between nvidia 
 
 Optimus systems with a nVidia GPU wihtout the GSP co-processor are usually those requireing special workaround on linux. (Pascal and older GPUs)
 
+[![build result](https://build.opensuse.org/projects/home:VortexAcherontic:prime-helper-ui/packages/prime-helper-ui/badge.svg?type=default)](https://build.opensuse.org/package/show/home:VortexAcherontic:prime-helper-ui/prime-helper-ui)
+
 ## Requirements
 - prime-select / suse-prime / Optimus-Manager
 - X11: Sorry no Wayland as prime-select does flip around X-Configfiles to do it's thing.
