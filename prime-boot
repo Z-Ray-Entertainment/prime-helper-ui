@@ -1,5 +1,22 @@
 #!/usr/bin/bash
-selected=$(zenity --list --radiolist --column="" --column="Title" --hide-header TRUE "offload" FALSE "nvidia" FALSE "intel" --hide-header --text="$(exec prime-i18n BootDriver)" --title="$(exec prime-i18n TitleSelect)")
+intel_boot=FALSE
+offload_boot=FALSE
+nvidia_boot=FALSE
+
+current_boot=($(exec /usr/sbin/prime-select get-boot))
+case ${current_boot[4]} in
+	"intel")
+	intel_boot=TRUE
+	;;
+	"offload")
+	offload_boot=TRUE
+	;;
+	"nvidia")
+	nvidia_boot=TRUE
+	;;
+esac
+
+selected=$(zenity --list --radiolist --column="" --column="Title" --hide-header $offload_boot "offload" $nvidia_boot "nvidia" $intel_boot "intel" --hide-header --text="$(exec prime-i18n BootDriver)" --title="$(exec prime-i18n TitleSelect)")
 case $? in
 	0)
 	pkexec /usr/sbin/prime-select boot $selected
