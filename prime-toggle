@@ -72,14 +72,14 @@ if $has_prime_select; then
 							kdialog --msgbox "$(exec prime-i18n TitleSuccess)" --title="Logout"
 						;;
 					esac
-					;;
-				esac
-				case $dialog_helper in
-					zenity)
-						gnome-session-quit --logout
-					;;
-					kdialog)
-						qdbus org.kde.ksmserver /KSMServer logout 1 0 3
+					case $dialog_helper in
+						zenity)
+							gnome-session-quit --logout
+						;;
+						kdialog)
+							qdbus org.kde.ksmserver /KSMServer logout 1 0 3
+						;;
+					esac
 					;;
 				esac
 				;;
