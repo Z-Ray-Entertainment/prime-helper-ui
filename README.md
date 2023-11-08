@@ -6,6 +6,7 @@ Aka: suse-prime, prime-manager, optimus manager you name it.
 - prime-select / suse-prime / Optimus-Manager
 - X11: Sorry no Wayland as prime-select does flip around X-Configfiles to to it's thing.
 - bbswitch: for power managnement on older systems with out the GSP co-processor. (Pascal and older)
+- pkexec for gaphical sudo authentication
 
 ## Documentation
 ### prime-test
