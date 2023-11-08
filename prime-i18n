@@ -38,7 +38,7 @@ language_de["ToggleOffload"]="Ihr System läuft im offload modus. Bitte wählen 
 IFS='.' read -ra lang <<< "$LANG"
 
 case $lang in
-    de_DE)
+    de_DE|de_CH|de_LU|de_AT)
         echo ${language_de[$@]}
     ;;
     *)
