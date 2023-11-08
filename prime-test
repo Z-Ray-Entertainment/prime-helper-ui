@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+if command -v /usr/sbin/prime-select &> /dev/null; then
+    exit 0
+elif command -v /usr/bin/prime-select &> /dev/null; then
+    exit 0
+elif command -v prime-select &> /dev/null; then
+    exit 0
+else
+    zenity --warning --title="Warning" --text="$(exec prime-i18n PrimeNotFound)"
+    exit 1
+fi

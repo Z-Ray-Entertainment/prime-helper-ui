@@ -1,0 +1,41 @@
+#!/usr/bin/bash
+has_prime_select=false
+
+($(exec prime-test))
+case $? in
+	0)
+	has_prime_select=true
+	;;
+	1)
+	;;
+esac
+
+if $has_prime_select; then
+	current=($(exec /usr/sbin/prime-select get-current))
+	driver=${current[2]}
+	case $driver in
+		intel)
+			pkexec /usr/sbin/prime-select nvidia
+			case $? in
+				0)
+				zenity --info --title="Logout" --text="$(exec prime-i18n Logout)"
+				;;
+				1)
+				echo $?
+				;;
+			esac
+				
+			;;
+		nvidia)
+				pkexec /usr/sbin/prime-select intel
+			case $? in
+				0)
+				zenity --info --title="Logout" --text="$(exec prime-i18n Logout)"
+				;;
+				1)
+				echo $?
+				;;
+			esac
+			;;
+	esac
+fi

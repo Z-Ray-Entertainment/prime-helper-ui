@@ -1,0 +1,20 @@
+#!/usr/bin/bash
+declare -A language_default
+declare -A language_de
+
+language_default["PrimeNotFound"]="prime-select could not be found. Abort"
+language_de["PrimeNotFound"]="prime-select konnte nicht gefunden werden, breche ab."
+
+language_default["Logout"]="Driver switched to nvidia, please log out."
+language_de["Logout"]="Treiber gewechselt, bite melden Sie sich ab und wieder an"
+
+IFS='.' read -ra lang <<< "$LANG"
+
+case $lang in
+    de_DE)
+        echo ${language_de[$@]}
+    ;;
+    *)
+        echo ${language_default[$@]}
+    ;;
+esac
