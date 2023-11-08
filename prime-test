@@ -6,6 +6,12 @@ elif command -v /usr/bin/prime-select &> /dev/null; then
 elif command -v prime-select &> /dev/null; then
     exit 0
 else
-    zenity --warning --title="Warning" --text="$(exec prime-i18n PrimeNotFound)"
+    case $@ in
+        silent)
+        ;;
+        *)
+            zenity --warning --title="Warning" --text="$(exec prime-i18n PrimeNotFound)"
+        ;;
+    esac
     exit 1
 fi
