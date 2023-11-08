@@ -8,6 +8,18 @@ language_de["PrimeNotFound"]="prime-select konnte nicht gefunden werden, breche 
 language_default["Logout"]="Driver switched to nvidia, please log out."
 language_de["Logout"]="Treiber gewechselt, bite melden Sie sich ab und wieder an"
 
+language_default["BootDriver"]="Select driver to be used at boot"
+language_de["BootDriver"]="Wählen Sie den Treiber, der beim Start des Systems benutzt werden soll"
+
+language_default["TitleSelect"]="Select"
+language_de["TitleSelect"]="Wählen Sie"
+
+language_default["TitleSuccess"]="Success"
+language_de["TitleSuccess"]="Erfolgreich"
+
+language_default["BootDriverChanged"]="Driver changed successfully to:"
+language_de["BootDriverChanged"]="Treiber erfolgreich geändert zu:"
+
 IFS='.' read -ra lang <<< "$LANG"
 
 case $lang in

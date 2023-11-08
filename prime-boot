@@ -1,14 +1,11 @@
 #!/usr/bin/bash
-selected=$(zenity --list --radiolist --column="" --column="Title" --hide-header TRUE "offload" FALSE "nvidia" FALSE "intel" --hide-header --text="Select driver to be used at boot" --title="Boot driver")
+selected=$(zenity --list --radiolist --column="" --column="Title" --hide-header TRUE "offload" FALSE "nvidia" FALSE "intel" --hide-header --text="$(exec prime-i18n BootDriver)" --title="$(exec prime-i18n TitleSelect)")
 case $? in
 	0)
 	pkexec /usr/sbin/prime-select boot $selected
 	case $? in
 		0)
-		zenity --info --title="Success" --text="Driver changed successfully to $selected."
-		;;
-		1)
-		echo $?
+		zenity --info --title="$(exec prime-i18n TitleSuccess)" --text="$(prime-i18n BootDriverChanged) $selected."
 		;;
 	esac
 	;;
