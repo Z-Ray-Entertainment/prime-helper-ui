@@ -49,8 +49,16 @@ if $has_prime_select; then
 				;;
 			esac
 		;;
-		offload)
-			selected=$(zenity --list --radiolist --column="" --column="Title" --hide-header FALSE "nvidia" FALSE "intel" --hide-header --text="$(exec prime-i18n ToggleOffload)" --title="$(exec prime-i18n TitleSelect)")
+		offload)			
+			case $dialog_helper in
+				zenity)
+					selected=$(zenity --list --radiolist --column="" --column="Title" --hide-header FALSE "nvidia" TRUE "intel" --hide-header --text="$(exec prime-i18n ToggleOffload)" --title="$(exec prime-i18n TitleSelect)")
+				;;
+				kdialog)
+					selected=$(kdialog --radiolist "$(exec prime-i18n BootDriver)" "nvidia"  "nvidia" off "intel" "intel" on)
+				;;
+			esac
+			
 			case $? in
 				0)
 				pkexec /usr/sbin/prime-select $selected
