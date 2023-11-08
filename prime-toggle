@@ -20,22 +20,29 @@ if $has_prime_select; then
 				0)
 				zenity --info --title="Logout" --text="$(exec prime-i18n Logout)"
 				;;
-				1)
-				echo $?
-				;;
 			esac
-				
-			;;
+		;;
 		nvidia)
 				pkexec /usr/sbin/prime-select intel
 			case $? in
 				0)
 				zenity --info --title="Logout" --text="$(exec prime-i18n Logout)"
 				;;
-				1)
-				echo $?
+			esac
+		;;
+		offload)
+			selected=$(zenity --list --radiolist --column="" --column="Title" --hide-header FALSE "nvidia" FALSE "intel" --hide-header --text="$(exec prime-i18n ToggleOffload)" --title="$(exec prime-i18n TitleSelect)")
+			case $? in
+				0)
+				pkexec /usr/sbin/prime-select $selected
+				case $? in
+					0)
+					zenity --info --title="$(exec prime-i18n TitleSuccess)" --text="$(prime-i18n Logout)."
+					;;
+				esac
 				;;
 			esac
-			;;
+		;;
 	esac
+	gnome-session-quit --logout
 fi
