@@ -39,3 +39,6 @@ Helper script to display localized messages by reading the content of $LANG.
 Supported languages are:
 - English (Default)
 - German
+
+#### Desktop integration
+![prime-desktop](screenshots/screen_004.png "Prime Desktop")
