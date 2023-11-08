@@ -18,10 +18,12 @@ If prime-select could not be found an error message will be shown.
 
 ### prime-toggle
 Switches the driver from intel to nvidia or vise versa.  
-Checks the current condifured driver and will use the opposite.
+Checks the current configured driver and will use the opposite.
 
 ### prime-boot
-Set's the gpu driver to be used at boot. This can be intel, nvidia or offload
+Set the gpu driver to be used at boot. This can be intel, nvidia or offload.  
+The selection menu also pre-selects the current boot driver.  
+This means you can also use this to investigate which driver is currently configured to be used at boot.
 
 #### prime-i18n
 Helper script to display localized messages by reading the content of $LANG.  
