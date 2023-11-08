@@ -3,16 +3,16 @@ declare -A language_default
 declare -A language_de
 
 language_default["PrimeNotFound"]="prime-select could not be found. Abort"
-language_de["PrimeNotFound"]="prime-select konnte nicht gefunden werden, breche ab."
+language_de["PrimeNotFound"]="prime-select konnte nicht gefunden werden, beende."
 
-language_default["Logout"]="Driver switched to nvidia, please log out."
-language_de["Logout"]="Treiber gewechselt, bite melden Sie sich ab und wieder an"
+language_default["Logout"]="Driver switched, please log out and in again."
+language_de["Logout"]="Treiber gewechselt, bitte melden Sie sich ab und wieder an"
 
 language_default["BootDriver"]="Select driver to be used at boot"
 language_de["BootDriver"]="Wählen Sie den Treiber, der beim Start des Systems benutzt werden soll"
 
 language_default["TitleSelect"]="Select"
-language_de["TitleSelect"]="Wählen Sie"
+language_de["TitleSelect"]="Auswählen"
 
 language_default["TitleSuccess"]="Success"
 language_de["TitleSuccess"]="Erfolgreich"
@@ -20,20 +20,20 @@ language_de["TitleSuccess"]="Erfolgreich"
 language_default["BootDriverChanged"]="Driver changed successfully to:"
 language_de["BootDriverChanged"]="Treiber erfolgreich geändert zu:"
 
-language_default["PrimeRunNotNvidia"]="Your system is running in exclusive intel mode. Can not run appliction on nVidia GPU"
-language_de["PrimeRunNotNvidia"]="Ihr system läuft im exklusiven Intelmodus. Anwendungen können nicht auf der nVidia Grafikkarte ausgeführt werden."
+language_default["PrimeRunNotNvidia"]="Your system is running in exclusive intel mode. Can not run appliction on your nVidia GPU"
+language_de["PrimeRunNotNvidia"]="Ihr System läuft im exklusiven Intelmodus. Anwendungen können nicht auf der nVidia Grafikkarte ausgeführt werden."
 
-language_default["PrimeRunNoExec"]="No appication was specified to be run on your nVidia GPU."
+language_default["PrimeRunNoExec"]="No application was specified to be run on your nVidia GPU."
 language_de["PrimeRunNoExec"]="Es wurde keine Anwendung spezifiziert, die auf Ihrer nVidia Grafikkarte ausgeführt werden soll."
 
-language_default["ZinkRunNoExec"]="No appication was specified to be run using Zink (OpenGL over Vulkan)."
-language_de["ZinkRunNoExec"]="Es wurde keine Anwendung spezifiziert, die via Zink (OpenGL via Vulkan) ausgeführt werden soll."
+language_default["ZinkRunNoExec"]="No application was specified to be run using Zink (OpenGL over Vulkan)."
+language_de["ZinkRunNoExec"]="Es wurde keine Anwendung spezifiziert, die via Zink (OpenGL über Vulkan) ausgeführt werden soll."
 
-language_default["ZinkRunOffload"]="Your system runs in offload mode. It might be that Zink does run on your integrated GPU instead of your dedicated. If this is the case consider switching to nvidia exclusively"
-language_de["ZinkRunOffload"]="Ihr System läuft im offload modus. Es kann sein, dass Zink auf Ihrer integrierten Grafikkarte statt auf ihrer dedizierten ausgeführt wird. Sollte dies der Fall sein, ziehen Sie in betracht auf den exklusiven nViai Modus zu wechseln"
+language_default["ZinkRunOffload"]="Your system runs in offload mode. It might be that Zink does run on your integrated GPU instead of your dedicated one. If this is the case consider switching to nvidia exclusively"
+language_de["ZinkRunOffload"]="Ihr System läuft im Offloadmodus. Es kann sein, dass Zink auf Ihrer integrierten Grafikkarte statt auf ihrer dedizierten ausgeführt wird. Sollte dies der Fall sein, ziehen Sie in betracht auf den exklusiven Nvidiamodus zu wechseln"
 
-language_default["ToggleOffload"]="Your system is running in offload mode. Please select which driver you want to swtich to:"
-language_de["ToggleOffload"]="Ihr System läuft im offload modus. Bitte wählen Sie zu welchem Treiber Sie wechseln möchten"
+language_default["ToggleOffload"]="Your system is running in offload mode. Please select which driver you want to switch to:"
+language_de["ToggleOffload"]="Ihr System läuft im offload modus. Bitte wählen Sie aus auf welchem Treiber gewechselt werden soll:"
 
 IFS='.' read -ra lang <<< "$LANG"
 
