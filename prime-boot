@@ -1,7 +1,23 @@
 #!/usr/bin/bash
-intel_boot=FALSE
-offload_boot=FALSE
-nvidia_boot=FALSE
+if command -v zenity &> /dev/null; then
+    dialog_helper=zenity
+elif command -v kdialog &> /dev/null; then
+    dialog_helper=kdialog
+fi
+
+case $dialog_helper in
+	zenity)
+		intel_boot=FALSE
+		offload_boot=FALSE
+		nvidia_boot=FALSE
+	;;
+	kdialog)
+		intel_boot=off
+		offload_boot=off
+		nvidia_boot=off
+	;;
+esac
+
 
 has_prime_select=false
 
@@ -16,23 +32,59 @@ if $has_prime_select; then
 	current_boot=($(exec /usr/sbin/prime-select get-boot))
 	case ${current_boot[4]} in
 		"intel")
-		intel_boot=TRUE
+			case $dialog_helper in
+				zenity)
+					intel_boot=TRUE
+				;;
+				kdialog)
+					intel_boot=on
+				;;
+			esac
 		;;
 		"offload")
-		offload_boot=TRUE
+			case $dialog_helper in
+				zenity)
+					offload_boot=TRUE
+				;;
+				kdialog)
+					offload_boot=on
+				;;
+			esac
 		;;
 		"nvidia")
-		nvidia_boot=TRUE
+			case $dialog_helper in
+				zenity)
+					nvidia_boot=TRUE
+				;;
+				kdialog)
+					nvidia_boot=on
+				;;
+			esac
 		;;
 	esac
 
-	selected=$(zenity --list --radiolist --column="" --column="Title" --hide-header $offload_boot "offload" $nvidia_boot "nvidia" $intel_boot "intel" --hide-header --text="$(exec prime-i18n BootDriver)" --title="$(exec prime-i18n TitleSelect)")
+	case $dialog_helper in
+		zenity)
+			selected=$(zenity --list --radiolist --column="" --column="Title" --hide-header $offload_boot "offload" $nvidia_boot "nvidia" $intel_boot "intel" --hide-header --text="$(exec prime-i18n BootDriver)" --title="$(exec prime-i18n TitleSelect)")
+		;;
+		kdialog)
+			selected=$(kdialog --radiolist "$(exec prime-i18n BootDriver)" "offload" "offload" $offload_boot "nvidia"  "nvidia" $nvidia_boot "intel" "intel" $intel_boot)
+		;;
+	esac
+
 	case $? in
 		0)
 		pkexec /usr/sbin/prime-select boot $selected
 		case $? in
 			0)
-			zenity --info --title="$(exec prime-i18n TitleSuccess)" --text="$(prime-i18n BootDriverChanged) $selected."
+			case $dialog_helper in
+				zenity)
+					zenity --info --title="$(exec prime-i18n TitleSuccess)" --text="$(prime-i18n BootDriverChanged) $selected."
+				;;
+				kdialog)
+					kdialog --title="$(exec prime-i18n TitleSuccess)" --msgbox "$(prime-i18n BootDriverChanged) $selected."
+				;;
+			esac
 			;;
 		esac
 		;;

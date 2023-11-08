@@ -1,6 +1,19 @@
 #!/usr/bin/bash
+if command -v zenity &> /dev/null; then
+    dialog_helper=zenity
+elif command -v kdialog &> /dev/null; then
+    dialog_helper=kdialog
+fi
+
 if [ -z ${@+x} ]; then
-    zenity --info --text="$(exec prime-i18n PrimeRunNoExec)" --title="PrimeRun"
+    case $dialog_helper in
+        zenity)
+            zenity --info --text="$(exec prime-i18n PrimeRunNoExec)" --title="PrimeRun"
+        ;;
+        kdialog)
+            kdialog --msgbox "$(exec prime-i18n PrimeRunNoExec)" --title="PrimeRun"
+        ;;
+    esac
 else
     has_prime_select=false
 
@@ -16,7 +29,14 @@ else
         driver=${current[2]}
         case $driver in
             intel)
-                zenity --info --text="$(exec prime-i18n PrimeRunNotNvidia)" --title="PrimeRun"
+                case $dialog_helper in
+                    zenity)
+                        zenity --info --text="$(exec prime-i18n PrimeRunNotNvidia)" --title="PrimeRun"
+                    ;;
+                    kdialog)
+                        kdialog --msgbox "$(exec prime-i18n PrimeRunNotNvidia)" --title="PrimeRun"
+                    ;;
+                esac
             ;;
             *)
                 __NV_PRIME_RENDER_OFFLOAD=1 __VK_LAYER_NV_optimus=NVIDIA_only __GLX_VENDOR_LIBRARY_NAME=nvidia "$@"

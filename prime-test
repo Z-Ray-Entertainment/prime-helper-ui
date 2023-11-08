@@ -1,4 +1,10 @@
 #!/usr/bin/bash
+if command -v zenity &> /dev/null; then
+    dialog_helper=zenity
+elif command -v kdialog &> /dev/null; then
+    dialog_helper=kdialog
+fi
+
 if command -v /usr/sbin/prime-select &> /dev/null; then
     exit 0
 elif command -v /usr/bin/prime-select &> /dev/null; then
@@ -10,7 +16,14 @@ else
         silent)
         ;;
         *)
-            zenity --warning --title="Warning" --text="$(exec prime-i18n PrimeNotFound)"
+            case $dialog_helper in
+                zenity)
+                    zenity --warning --title="Warning" --text="$(exec prime-i18n PrimeNotFound)"
+                ;;
+                kdialog)
+                    kdialog --sorry "$(exec prime-i18n PrimeNotFound)" --title="PrimeRun"
+                ;;
+            esac
         ;;
     esac
     exit 1

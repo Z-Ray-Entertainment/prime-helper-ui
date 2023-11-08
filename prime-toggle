@@ -1,5 +1,10 @@
 #!/usr/bin/bash
 has_prime_select=false
+if command -v zenity &> /dev/null; then
+    dialog_helper=zenity
+elif command -v kdialog &> /dev/null; then
+    dialog_helper=kdialog
+fi
 
 ($(exec prime-test))
 case $? in
@@ -18,7 +23,14 @@ if $has_prime_select; then
 			pkexec /usr/sbin/prime-select nvidia
 			case $? in
 				0)
-				zenity --info --title="Logout" --text="$(exec prime-i18n Logout)"
+				case $dialog_helper in
+					zenity)
+						zenity --info --title="Logout" --text="$(exec prime-i18n Logout)"
+					;;
+					kdialog)
+						kdialog --msgbox "$(exec prime-i18n Logout)" --title="Logout"
+					;;
+				esac
 				;;
 			esac
 		;;
@@ -26,7 +38,14 @@ if $has_prime_select; then
 				pkexec /usr/sbin/prime-select intel
 			case $? in
 				0)
-				zenity --info --title="Logout" --text="$(exec prime-i18n Logout)"
+				case $dialog_helper in
+					zenity)
+						zenity --info --title="Logout" --text="$(exec prime-i18n Logout)"
+					;;
+					kdialog)
+						kdialog --msgbox "$(exec prime-i18n Logout)" --title="Logout"
+					;;
+				esac
 				;;
 			esac
 		;;
@@ -37,7 +56,14 @@ if $has_prime_select; then
 				pkexec /usr/sbin/prime-select $selected
 				case $? in
 					0)
-					zenity --info --title="$(exec prime-i18n TitleSuccess)" --text="$(prime-i18n Logout)."
+					case $dialog_helper in
+						zenity)
+							zenity --info --title="Logout" --text="$(prime-i18n Logout)."
+						;;
+						kdialog)
+							kdialog --msgbox "$(exec prime-i18n TitleSuccess)" --title="Logout"
+						;;
+					esac
 					;;
 				esac
 				;;
