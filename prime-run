@@ -1,28 +1,28 @@
 #!/usr/bin/bash
-has_prime_select=false
-
-($(exec prime-test silent))
-case $? in
-	0)
-	has_prime_select=true
-	;;
-esac
-
-if $has_prime_select; then
-    current=($(exec /usr/sbin/prime-select get-current))
-	driver=${current[2]}
-	case $driver in
-		intel)
-            zenity --info --text="$(exec prime-i18n PrimeRunNotNvidia)" --title="PrimeRun"
-        ;;
-		*)
-            if [ -z ${@+x} ]; then
-                zenity --info --text="$(exec prime-i18n PrimeRunNoExec)" --title="PrimeRun"
-            else
-                __NV_PRIME_RENDER_OFFLOAD=1 __VK_LAYER_NV_optimus=NVIDIA_only __GLX_VENDOR_LIBRARY_NAME=nvidia "$@"
-            fi
-        ;;
-	esac
+if [ -z ${@+x} ]; then
+    zenity --info --text="$(exec prime-i18n PrimeRunNoExec)" --title="PrimeRun"
 else
-    __NV_PRIME_RENDER_OFFLOAD=1 __VK_LAYER_NV_optimus=NVIDIA_only __GLX_VENDOR_LIBRARY_NAME=nvidia "$@"
+    has_prime_select=false
+
+    ($(exec prime-test silent))
+    case $? in
+        0)
+        has_prime_select=true
+        ;;
+    esac
+
+    if $has_prime_select; then
+        current=($(exec /usr/sbin/prime-select get-current))
+        driver=${current[2]}
+        case $driver in
+            intel)
+                zenity --info --text="$(exec prime-i18n PrimeRunNotNvidia)" --title="PrimeRun"
+            ;;
+            *)
+                __NV_PRIME_RENDER_OFFLOAD=1 __VK_LAYER_NV_optimus=NVIDIA_only __GLX_VENDOR_LIBRARY_NAME=nvidia "$@"
+            ;;
+        esac
+    else
+        __NV_PRIME_RENDER_OFFLOAD=1 __VK_LAYER_NV_optimus=NVIDIA_only __GLX_VENDOR_LIBRARY_NAME=nvidia "$@"
+    fi
 fi
