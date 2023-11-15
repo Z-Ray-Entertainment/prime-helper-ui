@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec = prime-switch
+Icon = de.zray.prime-switch
+Type = Application
+Terminal = false
+Name = Prime Switch
+
