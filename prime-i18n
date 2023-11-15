@@ -32,8 +32,8 @@ language_de["ZinkRunNoExec"]="Es wurde keine Anwendung spezifiziert, die via Zin
 language_default["ZinkRunOffload"]="Your system runs in offload mode. It might be that Zink does run on your integrated GPU instead of your dedicated one. If this is the case consider switching to nvidia exclusively"
 language_de["ZinkRunOffload"]="Ihr System läuft im Offloadmodus. Es kann sein, dass Zink auf Ihrer integrierten Grafikkarte statt auf ihrer dedizierten ausgeführt wird. Sollte dies der Fall sein, ziehen Sie in betracht auf den exklusiven Nvidiamodus zu wechseln"
 
-language_default["ToggleOffload"]="Your system is running in offload mode. Please select which driver you want to switch to:"
-language_de["ToggleOffload"]="Ihr System läuft im offload modus. Bitte wählen Sie aus auf welchem Treiber gewechselt werden soll:"
+language_default["ToggleOffload"]="Please select which driver you want to switch to:"
+language_de["ToggleOffload"]="Bitte wählen Sie aus auf welchem Treiber gewechselt werden soll:"
 
 IFS='.' read -ra lang <<< "$LANG"
 

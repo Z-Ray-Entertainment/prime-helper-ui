@@ -1,0 +1,80 @@
+#!/usr/bin/bash
+has_prime_select=false
+if command -v zenity &> /dev/null; then
+    dialog_helper=zenity
+elif command -v kdialog &> /dev/null; then
+    dialog_helper=kdialog
+fi
+
+($(exec prime-test))
+case $? in
+	0)
+	has_prime_select=true
+	;;
+esac
+
+if $has_prime_select; then
+    current=($(exec /usr/sbin/prime-select get-current))
+	driver=${current[2]}
+    case $driver in
+		intel)
+			case $dialog_helper in
+				zenity)
+					selected=$(zenity --list --radiolist --column="" --column="Title" --hide-header FALSE "offload" FALSE "nvidia" --hide-header --text="$(exec prime-i18n ToggleOffload)" --title="$(exec prime-i18n TitleSelect)")
+				;;
+				kdialog)
+					selected=$(kdialog --radiolist "$(exec prime-i18n BootDriver)" "offload"  "offload" off "nvidia" "nvidia" off)
+				;;
+			esac
+		;;
+		nvidia)
+			case $dialog_helper in
+				zenity)
+					selected=$(zenity --list --radiolist --column="" --column="Title" --hide-header FALSE "offload" FALSE "intel" --hide-header --text="$(exec prime-i18n ToggleOffload)" --title="$(exec prime-i18n TitleSelect)")
+				;;
+				kdialog)
+					selected=$(kdialog --radiolist "$(exec prime-i18n BootDriver)" "offload"  "offload" off "intel" "intel" off)
+				;;
+			esac
+		;;
+		offload)			
+			case $dialog_helper in
+				zenity)
+					selected=$(zenity --list --radiolist --column="" --column="Title" --hide-header FALSE "nvidia" FALSE "intel" --hide-header --text="$(exec prime-i18n ToggleOffload)" --title="$(exec prime-i18n TitleSelect)")
+				;;
+				kdialog)
+					selected=$(kdialog --radiolist "$(exec prime-i18n BootDriver)" "nvidia"  "nvidia" off "intel" "intel" off)
+				;;
+			esac
+		;;
+	esac
+    case $? in
+        0)
+        pkexec /usr/sbin/prime-select $selected
+        case $? in
+            0)
+            case $dialog_helper in
+                zenity)
+                    zenity --info --title="Logout" --text="$(prime-i18n Logout)."
+                    gnome-session-quit --logout
+                ;;
+                kdialog)
+                    kdialog --msgbox "$(exec prime-i18n TitleSuccess)" --title="Logout"
+                    qdbus org.kde.ksmserver /KSMServer logout 1 0 3
+                ;;
+            esac
+            ;;
+        esac
+        ;;
+    esac
+else
+    case $dialog_helper in
+        zenity)
+            zenity --warning --title="Warning" --text="$(exec prime-i18n PrimeNotFound)"
+            gnome-session-quit --logout
+        ;;
+        kdialog)
+            kdialog --title "Warning" --sorry "$(exec prime-i18n PrimeNotFound)"
+        ;;
+    esac
+fi
