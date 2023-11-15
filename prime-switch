@@ -71,7 +71,6 @@ else
     case $dialog_helper in
         zenity)
             zenity --warning --title="Warning" --text="$(exec prime-i18n PrimeNotFound)"
-            gnome-session-quit --logout
         ;;
         kdialog)
             kdialog --title "Warning" --sorry "$(exec prime-i18n PrimeNotFound)"
