@@ -67,13 +67,4 @@ if $has_prime_select; then
         esac
         ;;
     esac
-else
-    case $dialog_helper in
-        zenity)
-            zenity --warning --title="Warning" --text="$(exec prime-i18n PrimeNotFound)"
-        ;;
-        kdialog)
-            kdialog --title "Warning" --sorry "$(exec prime-i18n PrimeNotFound)"
-        ;;
-    esac
 fi
