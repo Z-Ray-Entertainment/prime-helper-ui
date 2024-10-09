@@ -1,3 +1,6 @@
+> [!IMPORTANT]  
+> Discontinued in favour of [OptimusUI](https://github.com/Z-Ray-Entertainment/optimus-ui)
+
 # Prime Helper
 This is a collection of shell scripts and *.desktop files to be used with prime-select.  
 Aka: suse-prime, prime-manager, optimus manager etc.  
